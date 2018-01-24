@@ -13,9 +13,9 @@ inds = [22, 33, 43,  7, 28, 30, 13, 16, 17, 37, 10, 14, 34,  1, 19, 44,  0, 23, 
 objects = objects(inds + 1 ) ;
 symmetries = symmetries(inds + 1 , : ) ;
 
-% Train
-objects = objects(1:35);
-symmetries = symmetries(1:35,:);
+% TEST:
+objects = objects(36:end);
+symmetries = symmetries(36:end,:);
 
 recall_den_0 = 0;
 precision_num_0 = 0;
@@ -38,10 +38,10 @@ precision_num_4 = 0;
 precision_den_4 = 0;
 
 
-threshold = 0.1;
-threshold_symmetry2 = 0.05;
+threshold = 0.05;
+threshold_symmetry2 = 0.015;
 threshold_symmetry4 = 0.5; % 0.25 %HIGH BECAUSE NO 4 orders in train/val/test sets - to be fair with our models
-threshold_symmetryInf = 0.15;
+threshold_symmetryInf = 0.19;
 
 for index_obj=1:1:size(objects,2)
     object = objects(index_obj);
@@ -53,7 +53,11 @@ for index_obj=1:1:size(objects,2)
     try
         demo_C2Shape
     catch
-        demo_C2Shape
+        try
+            demo_C2Shape
+        catch
+            demo_C2Shape
+        end
     end
     correspondance_to_orders
     
@@ -83,11 +87,13 @@ recall_1 = (precision_num_1+0.0001)/(0.0001+recall_den_1);
 precision_1 = (precision_num_1+0.0001)/(0.0001+precision_den_1);
 recall_2 = (precision_num_2+0.0001)/(0.0001+recall_den_2);
 precision_2 = (precision_num_2+0.0001)/(0.0001+precision_den_2);
+recall_3 = (precision_num_3+0.0001)/(0.0001+recall_den_3);
+precision_3 = (precision_num_3+0.0001)/(0.0001+precision_den_3);
 recall_4 = (precision_num_4+0.0001)/(0.0001+recall_den_4);
 precision_4 = (precision_num_4+0.0001)/(0.0001+precision_den_4);
 
-recall_symmetries = ((precision_num_0+0.0001)/(0.0001+recall_den_0) + (precision_num_1+0.0001)/(0.0001+recall_den_1) + (precision_num_2+0.0001)/(0.0001+recall_den_2) + (precision_num_4+0.0001)/(0.0001+recall_den_4))/5;
-precision_symmetries = ((precision_num_0+0.0001)/(0.0001+precision_den_0) + (precision_num_1+0.0001)/(0.0001+precision_den_1) + (precision_num_2+0.0001)/(0.0001+precision_den_2) + (precision_num_4+0.0001)/(0.0001+precision_den_4))/5;
+recall_symmetries = ((precision_num_0+0.0001)/(0.0001+recall_den_0) + (precision_num_1+0.0001)/(0.0001+recall_den_1) + (precision_num_4+0.0001)/(0.0001+recall_den_4))/3;
+precision_symmetries = ((precision_num_0+0.0001)/(0.0001+precision_den_0) + (precision_num_1+0.0001)/(0.0001+precision_den_1) + (precision_num_4+0.0001)/(0.0001+precision_den_4))/3;
 
 F1_symmetries = 2.0*precision_symmetries*recall_symmetries/(precision_symmetries + recall_symmetries + 0.00001)
 

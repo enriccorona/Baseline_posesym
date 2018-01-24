@@ -14,7 +14,7 @@ valuesX = 0;
 valuesY = 0;
 valuesZ = 0;
 
-for angle=1:0.1:359
+for angle=1:1:359
     Rx = [ [1, 0, 0]; [0, cos(angle), -1*sin(angle)]; [0, sin(angle), cos(angle)] ];
     Ry = [ [ cos(angle), 0, sin(angle) ]; [0,1,0]; [-1*sin(angle), 0, cos(angle) ] ];
     Rz = [ [cos(angle), -1*sin(angle), 0]; [sin(angle), cos(angle), 0 ]; [0, 0, 1] ];
