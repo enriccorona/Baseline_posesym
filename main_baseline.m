@@ -13,9 +13,9 @@ inds = [22, 33, 43,  7, 28, 30, 13, 16, 17, 37, 10, 14, 34,  1, 19, 44,  0, 23, 
 objects = objects(inds + 1 ) ;
 symmetries = symmetries(inds + 1 , : ) ;
 
-% Test
-objects = objects(36:end);
-symmetries = symmetries(36:end,:);
+% Train
+objects = objects(1:35);
+symmetries = symmetries(1:35,:);
 
 recall_den_0 = 0;
 precision_num_0 = 0;
